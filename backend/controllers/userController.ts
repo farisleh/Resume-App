@@ -1,38 +1,27 @@
 import { Request, Response } from 'express';
-import { getUsers, addUser, getUser, getUserResume, User } from '../models/userModel';
+import { getUsers, getUser } from '../services/userService';
+import { getUserResume } from '../services/resumeService';
 
-const getAllUsers = (req: Request, res: Response) => {
-  getUsers((err: any, users: User[]) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
+export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await getUsers();
     res.json(users);
-  });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-const createUser = (req: Request, res: Response) => {
-  const newUser: User = req.body;
-  addUser(newUser, (err: any, result: any) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.status(201).json(result);
-  });
-};
-
-const getUserById = (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response): Promise<void> => {
   const userId = req.params.id;
-  getUser(userId, (err: any, user: User) => {
-    if (err) {
-      return res.status(500).send(err);
+  try {
+    const user = await getUser(userId);
+    if (!user) {
+      res.status(404).send('User not found');
+      return;
     }
-    getUserResume(userId, (resumeErr: any, resume: any) => {
-      if (resumeErr) {
-        return res.status(500).send(resumeErr);
-      }
-      res.json({ user, resume });
-    });
-  });
+    const resume = await getUserResume(userId);
+    res.json({ user, resume });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
-
-export { getAllUsers, createUser, getUserById };
