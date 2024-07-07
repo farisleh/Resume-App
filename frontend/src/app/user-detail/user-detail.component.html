@@ -1,0 +1,110 @@
+<div class="container mt-5">
+    <!-- Main Content Grid -->
+    <div class="row">
+        <!-- Left Column - Profile Information -->
+        <div class="col-md-8">
+            <div>
+                <div class="card-body">
+                    <h3 class="card-title"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJI70GOV94uadGHnBqfK7ytybiFZjsLDYA3Q&s" alt="Avatar" class="avatar">{{ userDetail.user?.name }}</h3>
+                    <br>
+                    <div *ngIf="userDetail.resume">
+                        <p>{{ userDetail.resume?.summary }}</p>
+                    </div>
+                    <p class="card-text">
+                        <i class="fa fa-phone fa-fw w3-margin-right w3-large text-teal"></i>{{ userDetail.user?.phone }}
+                    </p>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <p class="fa fa-suitcase fa-fw w3-margin-right w3-large text-teal"></p>Education
+                    </h4>
+                    <div class="card-text" *ngFor="let education of userDetail.resume?.education">
+                        <br>
+                        <div class="mb-3">
+                            <h6 class="w3-opacity"><b>{{ education.institution_name }}</b></h6>
+                            <span class="text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ education.start_date | date: 'MMM yyyy' }} - {{ education.end_date | date: 'MMM yyyy' }}</span>
+                            <p>{{ education.degree }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <p class="fa fa-suitcase fa-fw w3-margin-right w3-large text-teal"></p>Work Experience
+                    </h4>
+                    <div class="card-text" *ngFor="let experience of userDetail.resume?.experience">
+                        <br>
+                        <div class="mb-3">
+                            <h6 class="w3-opacity"><b>{{ experience.job_title }}, {{ experience.company_name }}</b></h6>
+                            <span class="text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ experience.start_date | date: 'MMM yyyy' }} - {{ experience.end_date | date: 'MMM yyyy' }}</span>
+                            <p>{{ experience.job_description }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <p class="fa fa-suitcase fa-fw w3-margin-right w3-large text-teal"></p>Internships
+                    </h4>
+                    <div class="card-text" *ngFor="let intern of userDetail.resume?.internship">
+                        <br>
+                        <div class="mb-3">
+                            <h6 class="w3-opacity"><b>{{ intern.company_name }}</b></h6>
+                            <span class="text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ intern.start_date | date: 'MMM yyyy' }} - {{ intern.end_date | date: 'MMM yyyy' }}</span>
+                            <p>{{ intern.job_description }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <p class="fa fa-suitcase fa-fw w3-margin-right w3-large text-teal"></p>References
+                    </h4>
+                    <div class="card-text" *ngFor="let refer of userDetail.resume?.refer">
+                        <br>
+                        <div class="mb-3">
+                            <h6 class="w3-opacity"><b>{{ refer.name }} | {{ refer.relationship }}</b></h6>
+                            <span class="text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ refer.contact_info }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Skills Information -->
+        <div class="col-md-4">
+            <div class="teal-background full-height">
+                <div class="card-body" style="padding: 20px;">
+                    <h5 class="card-title">
+                        <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge text-teal"></i>Details
+                    </h5>
+                    <div class="card-text">
+                        <div class="mb-3">
+                            <p>{{userDetail.user?.address}}</p>
+                            <p>{{userDetail.user?.phone}}</p>
+                            <p>{{userDetail.user?.email}}</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="w3-opacity"><b>Nationality</b></h6>
+                            <p>Malaysia</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="w3-opacity"><b>Date/Place of Birth</b></h6>
+                            <p>1995-07-10</p>
+                            <p>Gurun</p>
+                        </div>
+                        <div>
+                            <h6 class="w3-opacity"><b>Links</b></h6>
+                            <p>https://github.com/farisleh</p>
+                            <p>https://www.linkedin.com/in/faris-shukri</p>
+                        </div>
+                        <h6 class="w3-opacity"><b>Skills</b></h6>
+                        <ul *ngFor="let skill of userDetail.resume?.skills">
+                            <li>{{ skill.skill_name }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

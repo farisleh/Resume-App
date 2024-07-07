@@ -1,0 +1,16 @@
+.full-height {
+    height: 100%; /* Make the teal-background div take up the full height */
+    display: flex;
+    flex-direction: column;
+}
+
+.teal-background {
+    background-color: teal;
+}
+
+.avatar {
+    width: 80px; /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
+    border-radius: 80%; /* Ensure it's a circle */
+    margin-right: 10px; /* Adjust spacing between avatar and text */
+}
